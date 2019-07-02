@@ -16,8 +16,8 @@ function App() {
         </form>
         <div className="result">
           <Table />
-          <Link href="https://yandex.ru/maps" text="на Яндекс-картах" center/>
-          <Link href="https://www.google.ru/maps" text="на Гугл-картах" />
+          <Link resurs={"yandex"} />
+          <Link resurs="google" />
         </div>
       </div>
     </div>
@@ -74,8 +74,28 @@ class Columns extends React.Component {
 
 class Link extends React.Component {
   render() {
+    let fullLink = "",
+      textLink = "";
+
+    switch (this.props.resurs) {
+      case "yandex":
+        fullLink = "https://yandex.ru/maps";
+        textLink = "на Яндекс-картах";
+        break;
+      case "google":
+        fullLink = "https://www.google.ru/maps";
+        textLink = "на Гугл-картах";
+        break;
+      default:
+        fullLink = "#";
+        textLink = "Ссылка";
+        break;
+    }
+
     return (
-      <a href={this.props.href}>{this.props.text}</a>
+      <a href={fullLink} onClick={() => alert('клик')}>
+        {textLink}
+      </a>
     );
   }
 }
