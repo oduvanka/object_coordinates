@@ -23,6 +23,7 @@ class App extends React.Component {
           arrCoords: objNewCoords.coords,
           error: ""
         });
+        document.title = objNewCoords.name;
       }
     }
   }
