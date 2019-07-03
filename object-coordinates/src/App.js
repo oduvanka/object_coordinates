@@ -7,7 +7,7 @@ import Result from './components/result';
 class App extends React.Component {
   state = {
     name: undefined,
-    arrCoords: [[10, 20],[100, 200]],
+    arrCoords: undefined,
     error: undefined
   }
   getCoordinates = (evt) => {
@@ -17,11 +17,13 @@ class App extends React.Component {
     const newCoords = evt.target.coordinates.value;
     if (newCoords) {
       const objNewCoords = JSON.parse(newCoords);
-      this.setState({
-        name: objNewCoords.name,
-        arrCoords: objNewCoords.coords,
-        error: ""
-      });
+      if (objNewCoords) {
+        this.setState({
+          name: objNewCoords.name,
+          arrCoords: objNewCoords.coords,
+          error: ""
+        });
+      }
     }
   }
   render() {
