@@ -6,8 +6,8 @@ class InitialData extends React.Component {
     return (
       <form className="form-coordinates" onSubmit={this.props.jsonCoords}>
         <p className="form-group">
-          <label>Координаты:</label>
-          <textarea name="coordinates"></textarea>
+          <label>JSON с координатами:</label>
+          <textarea name="coordinates" required></textarea>
         </p>
         <Btn type="submit" text="Обработать" />
       </form>

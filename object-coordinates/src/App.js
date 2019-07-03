@@ -29,7 +29,8 @@ class App extends React.Component {
       <div className="App">
         <Info 
           title="Объект по координатам"
-          text="Введите координаты и нажмите кнопку Обработать" 
+          text="Введите json-текст: ключ name с именем объекта, и coords с массивом пар координат ширины и долготы. 
+          Затем нажмите кнопку Обработать."
         />
         <div className="content">
           <InitialData jsonCoords={this.getCoordinates} />
