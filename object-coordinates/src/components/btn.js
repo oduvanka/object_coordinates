@@ -8,9 +8,10 @@ class Btn extends React.Component {
       text: "Кнопка"
     }
   }
+  /* TODO текстовые данные из поля ввода преобразовывать в json */
   render() {
     return (
-      <button className="btn" type={this.props.type} onClick={() => alert('клик')}>
+      <button className="btn" type={this.props.type}>
       {this.props.text}
       </button>
     );

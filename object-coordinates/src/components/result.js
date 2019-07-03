@@ -6,7 +6,9 @@ class Result extends React.Component {
   render() {
     return (
       <div className="result">
-        <Table />
+        <Table 
+          arrCoords={this.props.arrCoords}
+        />
         <LinkMap resurs="yandex" />
         <LinkMap resurs="google" />
       </div>

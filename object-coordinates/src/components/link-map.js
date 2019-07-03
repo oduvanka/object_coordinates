@@ -3,9 +3,9 @@ import React from 'react';
 class LinkMap extends React.Component {
   render() {
     let fullLink = "",
-      textLink = "",
+      textLink = ""/*,
       centerLatitude = "",
-      centerLongitude = "";
+      centerLongitude = ""*/;
 
     switch (this.props.resurs) {
       case "yandex":

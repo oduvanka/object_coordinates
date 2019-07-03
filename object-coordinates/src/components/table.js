@@ -2,21 +2,21 @@ import React from 'react';
 
 class Table extends React.Component {
   render() {
+    const tRows = this.props.arrCoords.map((item, index) => {
+      return (
+        <tr key={index}>
+          <Columns latitude={item[0]} longitude={item[1]} />
+        </tr>
+      );
+    });
     return (
       <table>
         <tr>
-          <Columns latitude="58" longitude="37" />
+          <th>широта</th>
+          <th>долгота</th>
         </tr>
-        <tr>
-          <Columns latitude="59" longitude="37" />
-        </tr>
-        <tr>
-          <Columns latitude="58" longitude="39" />
-        </tr>
-        <tr>
-          <Columns latitude="58" longitude="38" />
-        </tr>
-      </table>
+        {tRows}
+      </table>      
     );
   }
 }
