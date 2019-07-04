@@ -21,6 +21,14 @@
   margin-bottom: 10px;
 }
 
+.form-group label {
+  display: block;
+  margin-right: 10px;
+  margin-bottom: 5px;
+
+  font-weight: bold;
+}
+
 .form-group textarea {
   box-sizing: border-box;
   width: 100%;
