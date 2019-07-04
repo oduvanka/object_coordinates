@@ -9,8 +9,16 @@ class Result extends React.Component {
         <Table 
           arrCoords={this.props.arrCoords}
         />
-        <LinkMap resurs="yandex" />
-        <LinkMap resurs="google" />
+        <LinkMap 
+          resurs="yandex" 
+          centerLatitude={this.props.centerLatitude} 
+          centerLongitude={this.props.centerLongitude} 
+        />
+        <LinkMap 
+          resurs="google" 
+          centerLatitude={this.props.centerLatitude} 
+          centerLongitude={this.props.centerLongitude} 
+        />
       </div>
     );
   }
