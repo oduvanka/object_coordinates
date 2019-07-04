@@ -3,6 +3,7 @@ import React from 'react';
 class Table extends React.Component {
   render() {
     let tRows = undefined;
+
     if (this.props.arrCoords) {
       tRows = this.props.arrCoords.map((item, index) => {
         return (
@@ -14,11 +15,15 @@ class Table extends React.Component {
     }
     return (
       <table>
-        <tr>
-          <th>широта</th>
-          <th>долгота</th>
-        </tr>
-        {tRows}
+        <thead>
+          <tr>
+            <th>широта</th>
+            <th>долгота</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tRows}
+        </tbody>
       </table>      
     );
   }
