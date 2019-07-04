@@ -1,4 +1,50 @@
 .App {
   width: 600px;
   margin: 0 auto;
+  padding: 20px 0;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.form-coordinates {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+}
+
+.form-group {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.form-group textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100px;
+
+  resize: vertical;
+}
+
+.btn {
+  padding: 6px;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+}
+
+.result table {
+  border-collapse: collapse;
+
+  margin-bottom: 10px;
+}
+
+.result td {
+  border-bottom: 1px solid grey;
 }
