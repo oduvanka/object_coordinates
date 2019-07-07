@@ -7,6 +7,7 @@ import Result from './components/result';
 class App extends React.Component {
   state = {
     name: undefined,
+    tempArrCoords: [[0, 0]],
     arrCoords: undefined,
     centerLatitude: 0,
     centerLongitude: 0
@@ -68,6 +69,7 @@ class App extends React.Component {
         />
         <div className="content">
           <InitialData 
+            tempArrCoords={this.state.tempArrCoords}
             jsonCoords={this.handleSubmitCoords}
             addItem={() => this.handleClickAdd()}
             removeItem={() => this.handleClickRemove()}
