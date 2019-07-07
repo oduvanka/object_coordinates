@@ -7,7 +7,7 @@ import Result from './components/result';
 class App extends React.Component {
   state = {
     name: undefined,
-    tempArrCoords: [[0, 0]],
+    tempArrCoords: [this.createUndefinedArr()],
     arrCoords: undefined,
     centerLatitude: 0,
     centerLongitude: 0
@@ -52,11 +52,18 @@ class App extends React.Component {
   }
 
   handleClickAdd() {
-    alert("+");
+    this.state.tempArrCoords.push(this.createUndefinedArr());
+    this.setState({
+      tempArrCoords: this.state.tempArrCoords
+    });
   }
 
   handleClickRemove() {
     alert("-");
+  }
+
+  createUndefinedArr() {
+    return ([undefined, undefined]);
   }
 
   render() {
