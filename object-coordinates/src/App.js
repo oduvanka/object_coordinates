@@ -52,6 +52,7 @@ class App extends React.Component {
   }
 
   handleClickAdd() {
+    /* Добавляет новую строку с полями ввода координат */
     this.state.tempArrCoords.push(this.createUndefinedArr());
     this.setState({
       tempArrCoords: this.state.tempArrCoords
@@ -59,10 +60,15 @@ class App extends React.Component {
   }
 
   handleClickRemove() {
-    alert("-");
+    /* Удаляет последнюю строку с полями ввода координат */
+    this.state.tempArrCoords.pop();
+    this.setState({
+      tempArrCoords: this.state.tempArrCoords
+    });
   }
 
   createUndefinedArr() {
+    /* Возвращает массив с парой неопределённых значений */
     return ([undefined, undefined]);
   }
 
