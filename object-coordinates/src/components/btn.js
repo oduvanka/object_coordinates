@@ -12,7 +12,7 @@ class Btn extends React.Component {
   /* TODO текстовые данные из поля ввода преобразовывать в json */
   render() {
     return (
-      <button className="btn" type={this.props.type} title={this.props.title}>
+      <button className="btn" type={this.props.type} title={this.props.title} onClick={this.props.onClick}>
         {this.props.text}
       </button>
     );

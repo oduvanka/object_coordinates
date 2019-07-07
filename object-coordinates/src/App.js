@@ -11,7 +11,8 @@ class App extends React.Component {
     centerLatitude: 0,
     centerLongitude: 0
   }
-  getCoordinates = (evt) => {
+
+  handleSubmitCoords = (evt) => {
     /* Получает координаты */
     evt.preventDefault();
     
@@ -33,6 +34,7 @@ class App extends React.Component {
       }
     }
   }
+
   setMedianCoords(newCoords, i) {
     /* Вычисляет медиану из всех координат ширины или долготы */
     let min = newCoords[0][i],
@@ -47,6 +49,15 @@ class App extends React.Component {
 
     return median.toFixed(6);
   }
+
+  handleClickAdd() {
+    alert("+");
+  }
+
+  handleClickRemove() {
+    alert("-");
+  }
+
   render() {
     return (
       <div className="App">
@@ -56,7 +67,11 @@ class App extends React.Component {
           Затем нажмите кнопку Обработать."
         />
         <div className="content">
-          <InitialData jsonCoords={this.getCoordinates} />
+          <InitialData 
+            jsonCoords={this.handleSubmitCoords}
+            addItem={() => this.handleClickAdd()}
+            removeItem={() => this.handleClickRemove()}
+          />
           <Result 
             name={this.state.name}
             arrCoords={this.state.arrCoords}

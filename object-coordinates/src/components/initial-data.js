@@ -20,8 +20,8 @@ class InitialData extends React.Component {
           </p>
         </div>
         <div>
-          <Btn type="button" text="+" title="Добавляет новую строку координат"/>
-          <Btn type="button" text="-" title="Удаляет последнюю строку координат"/>
+          <Btn type="button" text="+" title="Добавляет новую строку координат" onClick={() => this.props.addItem()}/>
+          <Btn type="button" text="-" title="Удаляет последнюю строку координат" onClick={() => this.props.removeItem()}/>
           <Btn type="submit" text="Обработать" />
         </div>
       </form>
