@@ -11,9 +11,7 @@ class App extends React.Component {
     this.state = {
       name: undefined,
       tempArrCoords: [this.createUndefinedArr()],
-      arrCoords: undefined,
-      centerLatitude: 0,
-      centerLongitude: 0
+      arrCoords: undefined
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -42,36 +40,29 @@ class App extends React.Component {
     /* Получает координаты */
     evt.preventDefault();
     
+    const newCoords = evt.target.coordinates.value;
+    if (newCoords) {
+      const objNewCoords = JSON.parse(newCoords);
+      if (objNewCoords) {
+        this.setState({
+          name: objNewCoords.name,
+          arrCoords: objNewCoords.coords
+        });
+        
+        document.title = objNewCoords.name;
+      }
+    }
+  }
     const newCoords = this.state.tempArrCoords;
     const newName = evt.target.nameJSON.value;
     if (newName) {
-      const newCenterLatitude = (newCoords) ? this.setMedianCoords(newCoords, 0) : 0;
-      const newCenterLongitude = (newCoords) ? this.setMedianCoords(newCoords, 1) : 0;
-
       this.setState({
         name: newName,
-        arrCoords: newCoords,
-        centerLatitude: newCenterLatitude,
-        centerLongitude: newCenterLongitude
+        arrCoords: newCoords
       });
       
       document.title = newName;
     }
-  }
-
-  setMedianCoords(newCoords, i) {
-    /* Вычисляет медиану из всех координат ширины или долготы */
-    let min = newCoords[0][i],
-      max = newCoords[0][i];
-
-    newCoords.forEach((item) => {
-      if (item[i] < min) {min = item[i];}
-      else if (item[i] > max) {max = item[i];}
-    });
-    
-    const median = (min + max) / 2;
-
-    return median.toFixed(6);
   }
 
   handleClickAdd() {
@@ -114,8 +105,6 @@ class App extends React.Component {
           <Result 
             name={this.state.name}
             arrCoords={this.state.arrCoords}
-            centerLatitude={this.state.centerLatitude}
-            centerLongitude={this.state.centerLongitude}
           />
         </div>
       </div>
