@@ -2,21 +2,18 @@ import React from 'react';
 
 class LinkMap extends React.Component {
   render() {
-    let url = "",
-      text = "";
+    let url = "#",
+      text = "Ссылка";
 
     switch (this.props.resurs) {
       case "yandex":
-        url = "https://yandex.ru/maps/?text=" + this.props.centerLatitude + "," + this.props.centerLongitude;
-        text = "на Яндекс-картах";
+        url = "https://yandex.ru/maps/?text=" + this.props.coordLatitude + "," + this.props.coordLongitude;
         break;
       case "google":
-        url = "https://www.google.com/maps/search/?api=1&query=" + this.props.centerLatitude + "," + this.props.centerLongitude;
-        text = "на Гугл-картах";
+        url = "https://www.google.com/maps/search/?api=1&query=" + this.props.coordLatitude + "," + this.props.coordLongitude;
         break;
       default:
         url = "#";
-        text = "Ссылка";
         break;
     }
 

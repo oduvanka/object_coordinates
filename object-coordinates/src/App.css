@@ -1,5 +1,5 @@
 .App {
-  width: 600px;
+  width: 800px;
   margin: 0 auto;
   padding: 20px 0;
 }
@@ -36,7 +36,7 @@
 .result {
   display: flex;
   flex-direction: column;
-  width: 220px;
+  width: 420px;
 }
 
 .result table {
