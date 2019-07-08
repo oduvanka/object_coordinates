@@ -32,7 +32,7 @@ class Table extends React.Component {
 class Columns extends React.Component {
   render() {
     return (
-      <React.Fragment key={this.props.latitude + this.props.longitude}>
+      <React.Fragment>
         <td>{this.props.latitude}</td>
         <td>{this.props.longitude}</td>
       </React.Fragment>

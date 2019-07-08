@@ -5,8 +5,8 @@ class InitialData extends React.Component {
   render() {
     const listCoords = this.props.tempArrCoords.map((item, index) => {
       return (
-        <li className="coordinates-item" key={index}>
-          <ItemCoords item={item}/>
+        <li className="coordinates-item" key={index} onChange={this.props.changeInput.bind(this, index)}>
+          <ItemCoords item={item} />
         </li>
       );
     });
@@ -21,8 +21,8 @@ class InitialData extends React.Component {
           {listCoords}
         </ul>
         <div>
-          <Btn type="button" text="+" title="Добавляет новую строку координат" onClick={() => this.props.addItem()}/>
-          <Btn type="button" text="-" title="Удаляет последнюю строку координат" onClick={() => this.props.removeItem()}/>
+          <Btn type="button" text="+" title="Добавляет новую строку координат" onClick={this.props.addItem}/>
+          <Btn type="button" text="-" title="Удаляет последнюю строку координат" onClick={this.props.removeItem}/>
           <Btn type="submit" text="Обработать" />
         </div>
       </form>
@@ -33,14 +33,14 @@ class InitialData extends React.Component {
 class ItemCoords extends React.Component {
   render() {
     return (
-      <React.Fragment key={this.props.index}>
+      <React.Fragment>
         <p className="form-group">
           <label>Широта:</label>
-          <input name="LatitudeJSON" type="text" value={this.props.item[0]} required />
+          <input name="LatitudeJSON" type="text" onChange={this.props.onChange} required />
         </p>
         <p className="form-group">
           <label>Долгота:</label>
-          <input name="LongitudeJSON" type="text" value={this.props.item[1]} required />
+          <input name="LongitudeJSON" type="text" onChange={this.props.onChange} required />
         </p>
       </React.Fragment>
     )

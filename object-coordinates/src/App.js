@@ -5,34 +5,57 @@ import InitialData from './components/initial-data';
 import Result from './components/result';
 
 class App extends React.Component {
-  state = {
-    name: undefined,
-    tempArrCoords: [this.createUndefinedArr()],
-    arrCoords: undefined,
-    centerLatitude: 0,
-    centerLongitude: 0
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: undefined,
+      tempArrCoords: [this.createUndefinedArr()],
+      arrCoords: undefined,
+      centerLatitude: 0,
+      centerLongitude: 0
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmitCoords = this.handleSubmitCoords.bind(this);
+    this.handleClickAdd = this.handleClickAdd.bind(this);
+    this.handleClickRemove = this.handleClickRemove.bind(this);
   }
 
-  handleSubmitCoords = (evt) => {
+  handleChange(id, evt) {
+    const inputName = evt.target.name;
+    if (inputName === "LatitudeJSON" || inputName === "LongitudeJSON") {
+      const newTempArrCoords = this.state.tempArrCoords.map((item, i) => {
+        if (i === id) {
+          (inputName === "LatitudeJSON") ? (item[0] = evt.target.value) : (item[1] = evt.target.value);
+        }
+        return item;
+      })
+
+      this.setState({
+        tempArrCoords: newTempArrCoords
+      });
+    }
+  }
+
+  handleSubmitCoords(evt) {
     /* Получает координаты */
     evt.preventDefault();
     
-    const newCoords = evt.target.coordinates.value;
-    if (newCoords) {
-      const objNewCoords = JSON.parse(newCoords);
-      if (objNewCoords) {
-        const newCenterLatitude = (objNewCoords.coords) ? this.setMedianCoords(objNewCoords.coords, 0) : 0;
-        const newCenterLongitude = (objNewCoords.coords) ? this.setMedianCoords(objNewCoords.coords, 1) : 0;
+    const newCoords = this.state.tempArrCoords;
+    const newName = evt.target.nameJSON.value;
+    if (newName) {
+      const newCenterLatitude = (newCoords) ? this.setMedianCoords(newCoords, 0) : 0;
+      const newCenterLongitude = (newCoords) ? this.setMedianCoords(newCoords, 1) : 0;
 
-        this.setState({
-          name: objNewCoords.name,
-          arrCoords: objNewCoords.coords,
-          centerLatitude: newCenterLatitude,
-          centerLongitude: newCenterLongitude
-        });
-        
-        document.title = objNewCoords.name;
-      }
+      this.setState({
+        name: newName,
+        arrCoords: newCoords,
+        centerLatitude: newCenterLatitude,
+        centerLongitude: newCenterLongitude
+      });
+      
+      document.title = newName;
     }
   }
 
@@ -84,8 +107,9 @@ class App extends React.Component {
           <InitialData 
             tempArrCoords={this.state.tempArrCoords}
             jsonCoords={this.handleSubmitCoords}
-            addItem={() => this.handleClickAdd()}
-            removeItem={() => this.handleClickRemove()}
+            changeInput={this.handleChange}
+            addItem={this.handleClickAdd}
+            removeItem={this.handleClickRemove}
           />
           <Result 
             name={this.state.name}
