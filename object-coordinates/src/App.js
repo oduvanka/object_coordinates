@@ -40,19 +40,6 @@ class App extends React.Component {
     /* Получает координаты */
     evt.preventDefault();
     
-    const newCoords = evt.target.coordinates.value;
-    if (newCoords) {
-      const objNewCoords = JSON.parse(newCoords);
-      if (objNewCoords) {
-        this.setState({
-          name: objNewCoords.name,
-          arrCoords: objNewCoords.coords
-        });
-        
-        document.title = objNewCoords.name;
-      }
-    }
-  }
     const newCoords = this.state.tempArrCoords;
     const newName = evt.target.nameJSON.value;
     if (newName) {
