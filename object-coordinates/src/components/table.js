@@ -18,8 +18,18 @@ class Table extends React.Component {
       <table>
         <thead>
           <tr>
-            <th>широта</th>
-            <th>долгота</th>
+            <th>
+              <p>
+                <input className="sort-input visually-hidden-input" id="sort-latitude" type="radio" name="sort" value="latitude" />
+                <label className="sort-label" for="sort-latitude">широта</label>
+              </p>
+            </th>
+            <th>
+              <p>
+                <input className="sort-input visually-hidden-input" id="sort-longitude" type="radio" name="sort" value="longitude" />
+                <label className="sort-label" for="sort-longitude">долгота</label>
+              </p>
+            </th>
             <th>на Яндексе</th>
             <th>в Гугле</th>
           </tr>
