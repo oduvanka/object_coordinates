@@ -52,6 +52,10 @@
   resize: vertical;
 }
 
+.form-group input {
+  min-width: 150px;
+}
+
 .btn {
   min-width: 30px;
   padding: 6px;
