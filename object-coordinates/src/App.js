@@ -54,17 +54,18 @@ class App extends React.Component {
 
   handleClickAdd() {
     /* Добавляет новую строку с полями ввода координат */
-    this.state.tempArrCoords.push(this.createUndefinedArr());
+    const newArr = this.state.tempArrCoords.concat([this.createUndefinedArr()]);
     this.setState({
-      tempArrCoords: this.state.tempArrCoords
+      tempArrCoords: newArr
     });
   }
 
   handleClickRemove() {
     /* Удаляет последнюю строку с полями ввода координат */
-    this.state.tempArrCoords.pop();
+    const lengthArr = this.state.tempArrCoords.length;
+    const newArr = this.state.tempArrCoords.slice(0, lengthArr-1);
     this.setState({
-      tempArrCoords: this.state.tempArrCoords
+      tempArrCoords: newArr
     });
   }
 
