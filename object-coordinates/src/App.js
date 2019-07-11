@@ -21,17 +21,34 @@ class App extends React.Component {
   }
 
   handleChange(id, evt) {
+    /* Актуализирует информацию из полей ввода координат */
     const inputName = evt.target.name;
+    const inputValue = evt.target.value;
+    
     if (inputName === "LatitudeJSON" || inputName === "LongitudeJSON") {
-      const newTempArrCoords = this.state.tempArrCoords.map((item, i) => {
-        if (i === id) {
-          (inputName === "LatitudeJSON") ? (item[0] = evt.target.value) : (item[1] = evt.target.value);
-        }
-        return item;
-      })
+      /* Поля ввода координат */
+      const newTempArrCoords = this.state.tempArrCoords.slice();
+      let newRow = newTempArrCoords[id];
+
+      (inputName === "LatitudeJSON") ? (newRow.splice(0, 1, inputValue)) : (newRow.splice(1, 1, inputValue));
 
       this.setState({
         tempArrCoords: newTempArrCoords
+      });
+    }
+    else if (inputName === "sort" && this.state.arrCoords) {
+      /* Радиобаттоны сортировки */
+      const newArr = this.state.arrCoords.slice();
+      let j = 0;
+
+      if (inputValue === "longitude") {
+        j = 1;
+      }
+      
+      newArr.sort((a, b) => {return a[j] - b[j];});
+  
+      this.setState({
+        arrCoords: newArr
       });
     }
   }
@@ -40,7 +57,7 @@ class App extends React.Component {
     /* Получает координаты */
     evt.preventDefault();
     
-    const newCoords = this.state.tempArrCoords;
+    const newCoords = this.state.tempArrCoords.slice();
     const newName = evt.target.nameJSON.value;
     if (newName) {
       this.setState({
@@ -93,6 +110,7 @@ class App extends React.Component {
           <Result 
             name={this.state.name}
             arrCoords={this.state.arrCoords}
+            changeSort={this.handleChange}
           />
         </div>
       </div>
