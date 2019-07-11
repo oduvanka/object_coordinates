@@ -27,12 +27,10 @@ class App extends React.Component {
     
     if (inputName === "LatitudeJSON" || inputName === "LongitudeJSON") {
       /* Поля ввода координат */
-      const newTempArrCoords = this.state.tempArrCoords.map((item, i) => {
-        if (i === id) {
-          (inputName === "LatitudeJSON") ? (item[0] = inputValue) : (item[1] = inputValue);
-        }
-        return item;
-      })
+      const newTempArrCoords = this.state.tempArrCoords.slice();
+      let newRow = newTempArrCoords[id];
+
+      (inputName === "LatitudeJSON") ? (newRow.splice(0, 1, inputValue)) : (newRow.splice(1, 1, inputValue));
 
       this.setState({
         tempArrCoords: newTempArrCoords
