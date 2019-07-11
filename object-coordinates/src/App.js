@@ -21,6 +21,7 @@ class App extends React.Component {
   }
 
   handleChange(id, evt) {
+    /* Актуализирует информацию из полей ввода координат */
     const inputName = evt.target.name;
     if (inputName === "LatitudeJSON" || inputName === "LongitudeJSON") {
       const newTempArrCoords = this.state.tempArrCoords.map((item, i) => {
@@ -32,6 +33,20 @@ class App extends React.Component {
 
       this.setState({
         tempArrCoords: newTempArrCoords
+      });
+    }
+    else if (inputName === "sort" && this.state.arrCoords) {
+      const newArr = this.state.arrCoords.concat();
+      let j = 0;
+
+      if (evt.target.value === "longitude") {
+        j = 1;
+      }
+      
+      newArr.sort((a, b) => {return a[j] - b[j];});
+  
+      this.setState({
+        arrCoords: newArr
       });
     }
   }
@@ -93,6 +108,7 @@ class App extends React.Component {
           <Result 
             name={this.state.name}
             arrCoords={this.state.arrCoords}
+            changeSort={this.handleChange}
           />
         </div>
       </div>

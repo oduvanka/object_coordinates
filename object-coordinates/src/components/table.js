@@ -14,11 +14,12 @@ class Table extends React.Component {
         );
       });
     }
+
     return (
       <table>
         <thead>
           <tr>
-            <HeaderT />
+            <HeaderT onChange={this.props.changeSort.bind(this, null)} />
           </tr>
         </thead>
         <tbody>
@@ -35,14 +36,20 @@ class HeaderT extends React.Component {
       <React.Fragment>
         <th>
           <p>
-            <input className="sort-input visually-hidden-input" id="sort-latitude" type="radio" name="sort" value="latitude" />
-            <label className="sort-label" for="sort-latitude">широта</label>
+            <input 
+              className="sort-input visually-hidden-input" id="sort-latitude" type="radio" name="sort" value="latitude" 
+              onChange={this.props.onChange} 
+            />
+            <label className="sort-label" htmlFor="sort-latitude">широта</label>
           </p>
         </th>
         <th>
           <p>
-            <input className="sort-input visually-hidden-input" id="sort-longitude" type="radio" name="sort" value="longitude" />
-            <label className="sort-label" for="sort-longitude">долгота</label>
+            <input 
+              className="sort-input visually-hidden-input" id="sort-longitude" type="radio" name="sort" value="longitude" 
+              onChange={this.props.onChange} 
+            />
+            <label className="sort-label" htmlFor="sort-longitude">долгота</label>
           </p>
         </th>
         <th>на Яндексе</th>

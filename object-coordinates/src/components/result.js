@@ -7,6 +7,7 @@ class Result extends React.Component {
       <div className="result">        
         <Table 
           arrCoords={this.props.arrCoords}
+          changeSort={this.props.changeSort}
         />
       </div>
     );
