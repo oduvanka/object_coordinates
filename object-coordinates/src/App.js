@@ -23,10 +23,13 @@ class App extends React.Component {
   handleChange(id, evt) {
     /* Актуализирует информацию из полей ввода координат */
     const inputName = evt.target.name;
+    const inputValue = evt.target.value;
+    
     if (inputName === "LatitudeJSON" || inputName === "LongitudeJSON") {
+      /* Поля ввода координат */
       const newTempArrCoords = this.state.tempArrCoords.map((item, i) => {
         if (i === id) {
-          (inputName === "LatitudeJSON") ? (item[0] = evt.target.value) : (item[1] = evt.target.value);
+          (inputName === "LatitudeJSON") ? (item[0] = inputValue) : (item[1] = inputValue);
         }
         return item;
       })
@@ -39,7 +42,7 @@ class App extends React.Component {
       const newArr = this.state.arrCoords.concat();
       let j = 0;
 
-      if (evt.target.value === "longitude") {
+      if (inputValue === "longitude") {
         j = 1;
       }
       
