@@ -39,14 +39,12 @@ class App extends React.Component {
     }
     else if (inputName === "sort" && this.state.arrCoords) {
       /* Радиобаттоны сортировки */
-      const newArr = this.state.arrCoords.slice();
       let j = 0;
-
       if (inputValue === "longitude") {
         j = 1;
       }
-      
-      newArr.sort((a, b) => {return a[j] - b[j];});
+
+      const newArr = this.sortArray(this.state.arrCoords.slice(), j);
   
       this.setState({
         arrCoords: newArr
@@ -97,6 +95,16 @@ class App extends React.Component {
   createUndefinedArr() {
     /* Возвращает массив с парой неопределённых значений */
     return ([undefined, undefined]);
+  }
+
+  sortArray(myArr, j) {
+  /* Возвращает отсортированный двумерный массив,
+  myArr - массив,
+  j - измерение по которому будет сортироваться */
+
+    myArr.sort((a, b) => {return a[j] - b[j];});
+
+    return myArr;
   }
 
   render() {
