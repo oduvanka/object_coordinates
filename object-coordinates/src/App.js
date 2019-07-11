@@ -18,6 +18,7 @@ class App extends React.Component {
     this.handleSubmitCoords = this.handleSubmitCoords.bind(this);
     this.handleClickAdd = this.handleClickAdd.bind(this);
     this.handleClickRemove = this.handleClickRemove.bind(this);
+    this.handleClickRemoveExcess = this.handleClickRemoveExcess.bind(this);
   }
 
   handleChange(id, evt) {
@@ -86,6 +87,13 @@ class App extends React.Component {
     });
   }
 
+  handleClickRemoveExcess() {
+    /* Удялет из таблицы точки, которые дальше от остальных на 100 и более км (1 градус) */
+    if (this.state.arrCoords) {
+      alert("Убрать лишние");
+    }
+  }
+
   createUndefinedArr() {
     /* Возвращает массив с парой неопределённых значений */
     return ([undefined, undefined]);
@@ -111,6 +119,7 @@ class App extends React.Component {
             name={this.state.name}
             arrCoords={this.state.arrCoords}
             changeSort={this.handleChange}
+            removeExcess={this.handleClickRemoveExcess}
           />
         </div>
       </div>
