@@ -39,7 +39,8 @@ class App extends React.Component {
       });
     }
     else if (inputName === "sort" && this.state.arrCoords) {
-      const newArr = this.state.arrCoords.concat();
+      /* Радиобаттоны сортировки */
+      const newArr = this.state.arrCoords.slice();
       let j = 0;
 
       if (inputValue === "longitude") {
@@ -58,7 +59,7 @@ class App extends React.Component {
     /* Получает координаты */
     evt.preventDefault();
     
-    const newCoords = this.state.tempArrCoords;
+    const newCoords = this.state.tempArrCoords.slice();
     const newName = evt.target.nameJSON.value;
     if (newName) {
       this.setState({
