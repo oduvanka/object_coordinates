@@ -19,6 +19,7 @@ class App extends React.Component {
     this.handleClickAdd = this.handleClickAdd.bind(this);
     this.handleClickRemove = this.handleClickRemove.bind(this);
     this.handleClickRemoveExcess = this.handleClickRemoveExcess.bind(this);
+    this.handleClickTestData = this.handleClickTestData.bind(this);
   }
 
   handleChange(id, evt) {
@@ -50,6 +51,11 @@ class App extends React.Component {
         arrCoords: newArr
       });
     }
+    else if (inputName === "nameJSON") {
+      this.setState({
+        name: inputValue
+      });
+    }
   }
 
   handleSubmitCoords(evt) {
@@ -64,8 +70,13 @@ class App extends React.Component {
         arrCoords: newCoords
       });
       
-      document.title = newName;
+      this.setDocumentTitle(newName);
     }
+  }
+
+  setDocumentTitle(newTitle) {
+    /* Меняет заголовок документа */
+    document.title = newTitle;
   }
 
   handleClickAdd() {
@@ -185,6 +196,25 @@ class App extends React.Component {
     return coordRad;
   }
 
+  handleClickTestData() {
+    const testName = "Рыбинское водохранилище";
+    const testCoords = [
+      [57.932402, 38.475200],
+      [58.055728, 38.848267],
+      [58.503421, 39.112639],
+      [58.605576, 42.527806],
+      [58.826003, 37.153202],
+      [59.161561, 37.698044]
+    ];
+
+    this.setState({
+      name: testName,
+      tempArrCoords: testCoords
+    });
+
+    this.setDocumentTitle(testName);
+  }
+
   render() {
     return (
       <div className="App">
@@ -196,10 +226,12 @@ class App extends React.Component {
         <div className="content">
           <InitialData 
             tempArrCoords={this.state.tempArrCoords}
+            nameObject={this.state.name}
             jsonCoords={this.handleSubmitCoords}
             changeInput={this.handleChange}
             addItem={this.handleClickAdd}
             removeItem={this.handleClickRemove}
+            setTestData={this.handleClickTestData}
           />
           <Result 
             name={this.state.name}
