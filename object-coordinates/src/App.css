@@ -4,23 +4,6 @@
   padding: 20px 0;
 }
 
-.visually-hidden:not(:focus):not(:active),
-.visually-hidden-input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-
-  border: 0;
-
-  -webkit-clip-path: inset(100%);
-          clip-path: inset(100%);
-  clip: rect(0, 0, 0, 0);
-
-  overflow: hidden;
-}
-
 .content {
   display: flex;
   justify-content: space-between;
@@ -88,28 +71,6 @@
   border-collapse: collapse;
 
   margin-bottom: 10px;
-}
-
-.sort-label {
-  position: relative;
-  padding-left: 20px;
-}
-
-.sort-label::before {
-  content: "";
-  position: absolute;
-  top: 8px;
-  left: 0;
-  width: 0;
-  height: 0;
-
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 10px solid lightgray;
-}
-
-.sort-input:checked + .sort-label::before {
-  border-bottom-color: black;
 }
 
 .result td {
