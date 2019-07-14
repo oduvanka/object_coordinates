@@ -86,9 +86,14 @@ class App extends React.Component {
   }
 
   handleClickRemoveExcess() {
-    /* Удялет из таблицы точки, которые дальше от остальных на 100 и более км (1 градус) */
+    /* Удялет из таблицы точки, которые дальше от остальных на 100 км */
     if (this.state.arrCoords) {
-      alert("Убрать лишние");
+      const newArrSortLatitude = this.sortArray(this.state.arrCoords.slice());
+      const newArr = this.removeExcess(newArrSortLatitude, 0);
+
+      this.setState({
+        arrCoords: newArr
+      });
     }
   }
 
@@ -105,6 +110,73 @@ class App extends React.Component {
     myArr.sort((a, b) => {return a[j] - b[j];});
 
     return myArr;
+  }
+
+  removeExcess(myArr) {
+    /* Удаляет из массива элементы, отличающиеся от соседей на заданную дельту,
+    myArr - отсортированный массив координат,
+    typeCoord - измерение, по которому отсортирован массив */
+
+    const maxDistance = 100;
+    let i = 0;
+    
+    let distanceLeft,
+      distanceRight;
+
+    while (i < myArr.length) {
+      distanceLeft = 0;
+      distanceRight = 0;
+
+      if (i > 0) {
+        /* Если не первый элемент - узнаем его отдалённость от предыдущего элемента */
+        distanceLeft = this.getDistanceBetweenCoords(myArr[i-1], myArr[i]);
+      }
+      if (i < myArr.length-1) {
+        /* Если не последний элемент - узнаем его отдалённость от следующего элемента */
+        distanceRight = this.getDistanceBetweenCoords(myArr[i], myArr[i+1]);
+      }
+
+      i++;
+    }
+
+    return myArr;
+  }
+
+  getDistanceBetweenCoords(coord1, coord2) {
+    /* Вычисляет расстояние между географическими координатами,
+    coord1, coord2 - координаты вида (широта, долгота) */
+
+    const laticude1Rad = this.getCoordRad(coord1[0]),
+      longitude1Rad = this.getCoordRad(coord1[1]),
+      laticude2Rad = this.getCoordRad(coord2[0]),
+      longitude2Rad = this.getCoordRad(coord2[1]);
+
+    /* средний радиус земного шара, км */
+    const R = 6371;
+
+    /* расстояние между пунктами, измеряемое в радианах длиной дуги большого круга земного шара.  */
+    /* arccos( (sin(широта1) * sin(широта2)) + (cos(широта1) * cos(широта2) * cos(долгота1 - долгота2)) ) */
+    const d = 
+      (Math.acos(
+        Math.sin(laticude1Rad) * Math.sin(laticude2Rad) 
+        +
+        Math.cos(laticude1Rad) * Math.cos(laticude2Rad) * Math.cos(longitude1Rad - longitude2Rad)
+        )
+      );
+    
+    /* Расстояние между пунктами, км*/
+    const L = R * d;
+
+    return L;
+  }
+
+  getCoordRad(coordDeg) {
+    /* Переводит градусы в радианы,
+    coordDeg - градусы в десятичной записи */
+
+    const coordRad = coordDeg * Math.PI / 180;
+    
+    return coordRad;
   }
 
   render() {
