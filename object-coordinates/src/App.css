@@ -61,6 +61,10 @@
   font-weight: bold;
 }
 
+.form-group .input-Name {
+  width: 100%;
+}
+
 .form-group textarea {
   box-sizing: border-box;
   width: 100%;

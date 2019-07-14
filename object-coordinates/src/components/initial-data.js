@@ -15,7 +15,11 @@ class InitialData extends React.Component {
       <form className="form-coordinates" onSubmit={this.props.jsonCoords}>
         <p className="form-group">
           <label>Имя:</label>
-          <input name="nameJSON" type="text" required />
+          <input 
+            className="input-Name" name="nameJSON" type="text" required 
+            value={this.props.nameObject} 
+            onChange={this.props.changeInput.bind(this, null)} 
+          />
         </p>
         <ul className="coordinates-list" name="coordinates">
           {listCoords}
@@ -23,6 +27,7 @@ class InitialData extends React.Component {
         <div>
           <Btn type="button" text="+" title="Добавляет новую строку координат" onClick={this.props.addItem}/>
           <Btn type="button" text="-" title="Удаляет последнюю строку координат" onClick={this.props.removeItem}/>
+          <Btn type="button" text="Добавить тестовые данные" onClick={this.props.setTestData}/>
           <Btn type="submit" text="Обработать" />
         </div>
       </form>
@@ -36,11 +41,19 @@ class ItemCoords extends React.Component {
       <React.Fragment>
         <p className="form-group">
           <label>Широта:</label>
-          <input name="LatitudeJSON" type="number" onChange={this.props.onChange} min="-90" max="90" step="0.000001" required />
+          <input 
+            name="LatitudeJSON" type="number" min="-90" max="90" step="0.000001" required 
+            value={this.props.item[0]}
+            onChange={this.props.onChange} 
+          />
         </p>
         <p className="form-group">
           <label>Долгота:</label>
-          <input name="LongitudeJSON" type="number" onChange={this.props.onChange} min="-180" max="180" step="0.000001" required />
+          <input 
+            name="LongitudeJSON" type="number" min="-180" max="180" step="0.000001" required 
+            value={this.props.item[1]}
+            onChange={this.props.onChange} 
+          />
         </p>
       </React.Fragment>
     )
