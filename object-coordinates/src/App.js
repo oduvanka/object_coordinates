@@ -18,36 +18,20 @@ class App extends React.Component {
     this.handleSubmitCoords = this.handleSubmitCoords.bind(this);
     this.handleClickAdd = this.handleClickAdd.bind(this);
     this.handleClickRemove = this.handleClickRemove.bind(this);
-    this.handleClickRemoveExcess = this.handleClickRemoveExcess.bind(this);
   }
 
   handleChange(id, evt) {
-    /* Актуализирует информацию из полей ввода координат */
     const inputName = evt.target.name;
-    const inputValue = evt.target.value;
-    
     if (inputName === "LatitudeJSON" || inputName === "LongitudeJSON") {
-      /* Поля ввода координат */
-      const newTempArrCoords = this.state.tempArrCoords.slice();
-      let newRow = newTempArrCoords[id];
-
-      (inputName === "LatitudeJSON") ? (newRow.splice(0, 1, inputValue)) : (newRow.splice(1, 1, inputValue));
+      const newTempArrCoords = this.state.tempArrCoords.map((item, i) => {
+        if (i === id) {
+          (inputName === "LatitudeJSON") ? (item[0] = evt.target.value) : (item[1] = evt.target.value);
+        }
+        return item;
+      })
 
       this.setState({
         tempArrCoords: newTempArrCoords
-      });
-    }
-    else if (inputName === "sort" && this.state.arrCoords) {
-      /* Радиобаттоны сортировки */
-      let j = 0;
-      if (inputValue === "longitude") {
-        j = 1;
-      }
-
-      const newArr = this.sortArray(this.state.arrCoords.slice(), j);
-  
-      this.setState({
-        arrCoords: newArr
       });
     }
   }
@@ -56,7 +40,7 @@ class App extends React.Component {
     /* Получает координаты */
     evt.preventDefault();
     
-    const newCoords = this.state.tempArrCoords.slice();
+    const newCoords = this.state.tempArrCoords;
     const newName = evt.target.nameJSON.value;
     if (newName) {
       this.setState({
@@ -85,104 +69,9 @@ class App extends React.Component {
     });
   }
 
-  handleClickRemoveExcess() {
-    /* Удялет из таблицы точки, которые дальше от остальных на 100 км */
-    if (this.state.arrCoords) {
-      const newArrSortLatitude = this.sortArray(this.state.arrCoords.slice());
-      const newArr = this.removeExcess(newArrSortLatitude, 0);
-      
-      this.setState({
-        arrCoords: newArr
-      });
-    }
-  }
-
   createUndefinedArr() {
     /* Возвращает массив с парой неопределённых значений */
     return ([undefined, undefined]);
-  }
-
-  sortArray(myArr, j) {
-  /* Возвращает отсортированный двумерный массив,
-  myArr - массив,
-  j - измерение по которому будет сортироваться */
-
-    myArr.sort((a, b) => {return a[j] - b[j];});
-
-    return myArr;
-  }
-
-  removeExcess(myArr) {
-    /* Удаляет из массива элементы, отличающиеся от соседей на заданную дельту,
-    myArr - отсортированный массив координат,
-    typeCoord - измерение, по которому отсортирован массив */
-
-    const maxDistance = 100;
-    let i = 0;
-    
-    let distanceLeft,
-      distanceRight;
-
-    while (i < myArr.length) {
-      distanceLeft = 0;
-      distanceRight = 0;
-
-      if (i > 0) {
-        /* Если не первый элемент - узнаем его отдалённость от предыдущего элемента */
-        distanceLeft = this.getDistanceBetweenCoords(myArr[i-1], myArr[i]);
-      }
-      if (i < myArr.length-1) {
-        /* Если не последний элемент - узнаем его отдалённость от следующего элемента */
-        distanceRight = this.getDistanceBetweenCoords(myArr[i], myArr[i+1]);
-      }
-
-      if (distanceLeft >= maxDistance && distanceRight >= maxDistance) {
-        /* Удалить со сдвигом из myArr */
-        myArr.splice(i, 1);
-      }
-      else {
-        i++;
-      }
-    }
-    
-    return myArr;
-  }
-
-  getDistanceBetweenCoords(coord1, coord2) {
-    /* Вычисляет расстояние между географическими координатами,
-    coord1, coord2 - координаты вида (широта, долгота) */
-
-    const laticude1Rad = this.getCoordRad(coord1[0]),
-      longitude1Rad = this.getCoordRad(coord1[1]),
-      laticude2Rad = this.getCoordRad(coord2[0]),
-      longitude2Rad = this.getCoordRad(coord2[1]);
-
-    /* средний радиус земного шара, км */
-    const R = 6371;
-
-    /* расстояние между пунктами, измеряемое в радианах длиной дуги большого круга земного шара.  */
-    /* arccos( (sin(широта1) * sin(широта2)) + (cos(широта1) * cos(широта2) * cos(долгота1 - долгота2)) ) */
-    const d = 
-      (Math.acos(
-        Math.sin(laticude1Rad) * Math.sin(laticude2Rad) 
-        +
-        Math.cos(laticude1Rad) * Math.cos(laticude2Rad) * Math.cos(longitude1Rad - longitude2Rad)
-        )
-      );
-    
-    /* Расстояние между пунктами, км*/
-    const L = R * d;
-
-    return L;
-  }
-
-  getCoordRad(coordDeg) {
-    /* Переводит градусы в радианы,
-    coordDeg - градусы в десятичной записи */
-
-    const coordRad = coordDeg * Math.PI / 180;
-    
-    return coordRad;
   }
 
   render() {
@@ -190,7 +79,7 @@ class App extends React.Component {
       <div className="App">
         <Info 
           title="Объект по координатам"
-          text="Введите имя объекта, заполните поля его координатами широты и долготы. Координаты должны быть в десятичной системе счисления.
+          text="Введите json-текст: ключ name с именем объекта, и coords с массивом пар координат ширины и долготы. 
           Затем нажмите кнопку Обработать."
         />
         <div className="content">
@@ -204,8 +93,6 @@ class App extends React.Component {
           <Result 
             name={this.state.name}
             arrCoords={this.state.arrCoords}
-            changeSort={this.handleChange}
-            removeExcess={this.handleClickRemoveExcess}
           />
         </div>
       </div>
