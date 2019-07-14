@@ -90,7 +90,7 @@ class App extends React.Component {
     if (this.state.arrCoords) {
       const newArrSortLatitude = this.sortArray(this.state.arrCoords.slice());
       const newArr = this.removeExcess(newArrSortLatitude, 0);
-
+      
       this.setState({
         arrCoords: newArr
       });
@@ -136,9 +136,15 @@ class App extends React.Component {
         distanceRight = this.getDistanceBetweenCoords(myArr[i], myArr[i+1]);
       }
 
-      i++;
+      if (distanceLeft >= maxDistance && distanceRight >= maxDistance) {
+        /* Удалить со сдвигом из myArr */
+        myArr.splice(i, 1);
+      }
+      else {
+        i++;
+      }
     }
-
+    
     return myArr;
   }
 
