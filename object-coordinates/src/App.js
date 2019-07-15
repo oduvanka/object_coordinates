@@ -135,8 +135,8 @@ class App extends React.Component {
       distanceRight;
 
     while (i < myArr.length) {
-      distanceLeft = 0;
-      distanceRight = 0;
+      distanceLeft = maxDistance;
+      distanceRight = maxDistance;
 
       if (i > 0) {
         /* Если не первый элемент - узнаем его отдалённость от предыдущего элемента */
