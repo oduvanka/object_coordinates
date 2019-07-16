@@ -126,3 +126,8 @@
 .result p {
   margin: 0;
 }
+
+.map {
+  width: 320px;
+  margin-bottom: 20px;
+}

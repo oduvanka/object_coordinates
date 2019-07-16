@@ -3,7 +3,7 @@ import './App.css';
 import Info from './components/info';
 import InitialData from './components/initial-data';
 import Result from './components/result';
-import { YMaps, Map } from 'react-yandex-maps';
+import ObjOnTheMap from './components/obj-on-map';
 
 class App extends React.Component {
   constructor(props) {
@@ -217,6 +217,7 @@ class App extends React.Component {
   }
 
   render() {
+    
     return (
       <div className="App">
         <Info 
@@ -240,13 +241,9 @@ class App extends React.Component {
             changeSort={this.handleChange}
             removeExcess={this.handleClickRemoveExcess}
           />
-          <YMaps>
-            <div>
-              <Map 
-                defaultState={{ center: [55.75, 37.57], zoom: 9 }} 
-              />
-            </div>
-          </YMaps>
+          <div className="map">
+            <ObjOnTheMap testCenter={[57.932402, 38.475200]}/>
+          </div>
         </div>
       </div>
     );
