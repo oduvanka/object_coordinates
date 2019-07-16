@@ -242,7 +242,10 @@ class App extends React.Component {
             removeExcess={this.handleClickRemoveExcess}
           />
           <div className="map">
-            <ObjOnTheMap testCenter={[57.932402, 38.475200]}/>
+            <ObjOnTheMap 
+              testCenter={[58.641149, 38.123637]}
+              testCoords={this.state.arrCoords}
+            />
           </div>
         </div>
       </div>
