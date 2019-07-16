@@ -1,5 +1,5 @@
 .App {
-  width: 800px;
+  width: 960px;
   margin: 0 auto;
   padding: 20px 0;
 }
@@ -30,8 +30,9 @@
 .form-coordinates {
   display: flex;
   flex-direction: column;
-  width: 350px;
-  margin-right: 30px;
+  width: 250px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .coordinates-list {
@@ -74,7 +75,7 @@
 }
 
 .form-group input {
-  min-width: 150px;
+  min-width: 90px;
 }
 
 .btn {
@@ -85,7 +86,9 @@
 .result {
   display: flex;
   flex-direction: column;
-  width: 420px;
+  width: 350px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .result table {
@@ -118,4 +121,8 @@
 
 .result td {
   border-bottom: 1px solid grey;
+}
+
+.result p {
+  margin: 0;
 }

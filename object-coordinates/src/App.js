@@ -3,6 +3,7 @@ import './App.css';
 import Info from './components/info';
 import InitialData from './components/initial-data';
 import Result from './components/result';
+import { YMaps, Map } from 'react-yandex-maps';
 
 class App extends React.Component {
   constructor(props) {
@@ -239,6 +240,13 @@ class App extends React.Component {
             changeSort={this.handleChange}
             removeExcess={this.handleClickRemoveExcess}
           />
+          <YMaps>
+            <div>
+              <Map 
+                defaultState={{ center: [55.75, 37.57], zoom: 9 }} 
+              />
+            </div>
+          </YMaps>
         </div>
       </div>
     );

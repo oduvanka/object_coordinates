@@ -52,7 +52,7 @@ class HeaderT extends React.Component {
             <label className="sort-label" htmlFor="sort-longitude">долгота</label>
           </p>
         </th>
-        <th>на Яндексе</th>
+        <th>в Яндексе</th>
         <th>в Гугле</th>
       </React.Fragment>
     )
