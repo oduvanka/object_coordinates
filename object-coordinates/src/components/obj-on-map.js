@@ -3,7 +3,8 @@ import { YMaps, Map, Placemark } from 'react-yandex-maps';
 
 const mapState = {
   center: [55.75, 37.57],
-  zoom: 9
+  zoom: 9,
+  controls: ['zoomControl', 'fullscreenControl', 'rulerControl']
 };
 
 class ObjOnTheMap extends React.Component {
@@ -37,7 +38,11 @@ class ObjOnTheMap extends React.Component {
     }
 
     return (
-        <YMaps query={{ lang: "ru_RU", load: "package.full" }}>
+        <YMaps query={{ 
+            lang: "ru_RU", 
+            ns: 'use-load-option', 
+            load: 'Map,Placemark,control.ZoomControl,control.FullscreenControl,control.RulerControl,util.bounds' 
+          }}>
           <Map 
             defaultState={mapState}
             onLoad={ymaps => this.setYmaps(ymaps)}
