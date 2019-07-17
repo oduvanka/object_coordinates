@@ -17,7 +17,7 @@ class InitialData extends React.Component {
           <label>Имя:</label>
           <input 
             className="input-Name" name="nameJSON" type="text" required 
-            value={this.props.nameObject} 
+            defaultValue={this.props.nameObject} 
             onChange={this.props.changeInput.bind(this, null)} 
           />
         </p>
@@ -43,7 +43,7 @@ class ItemCoords extends React.Component {
           <label>Широта:</label>
           <input 
             name="LatitudeJSON" type="number" min="-90" max="90" step="0.000001" required 
-            value={this.props.item[0]}
+            defaultValue={this.props.item[0]}
             onChange={this.props.onChange} 
           />
         </p>
@@ -51,7 +51,7 @@ class ItemCoords extends React.Component {
           <label>Долгота:</label>
           <input 
             name="LongitudeJSON" type="number" min="-180" max="180" step="0.000001" required 
-            value={this.props.item[1]}
+            defaultValue={this.props.item[1]}
             onChange={this.props.onChange} 
           />
         </p>

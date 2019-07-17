@@ -243,8 +243,8 @@ class App extends React.Component {
           />
           <div className="map">
             <ObjOnTheMap 
-              testCenter={[58.641149, 38.123637]}
-              testCoords={this.state.arrCoords}
+              arrCoords={this.state.arrCoords}
+              sortCoords={this.sortArray}
             />
           </div>
         </div>

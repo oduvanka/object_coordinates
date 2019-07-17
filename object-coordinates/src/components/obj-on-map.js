@@ -1,46 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 
- function ObjOnTheMap(props) {
-  let centerCoords = [55.75, 37.57];
-  if (props.testCenter) {
-    centerCoords = props.testCenter;
+const mapState = {
+  center: [55.75, 37.57],
+  zoom: 9
+};
+
+class ObjOnTheMap extends React.Component {
+  state = {
+    ymaps: null
+  };
+
+  setYmaps = ymaps => {
+    this.setState({ ymaps });
+  };
+
+  setCenter = ref => {
+    const { ymaps } = this.state;
+    if (ymaps && this.props.arrCoords) {
+      const POINTS = this.props.arrCoords.concat();
+      ref.setBounds(ymaps.util.bounds.fromPoints(POINTS));
+    }
+  };
+  render() {
+    let tRows = undefined;
+
+    if (this.props.arrCoords) {      
+      tRows = this.props.arrCoords.map((item, index) => {
+        return (
+          <Placemark 
+            key={index}
+            defaultGeometry={item}
+          />
+        );
+      });
+    }
+
+    return (
+        <YMaps query={{ lang: "ru_RU", load: "package.full" }}>
+          <Map 
+            defaultState={mapState}
+            onLoad={ymaps => this.setYmaps(ymaps)}
+            instanceRef={ref => ref && this.setCenter(ref)}
+          >
+            {tRows}
+          </Map>
+        </YMaps>      
+    )
   }
-
-  const [zoom, setZoom] = React.useState(7);
-  const mapState = React.useMemo(
-    () => ({ 
-      center: centerCoords, 
-      zoom, 
-      controls: ['zoomControl', 'fullscreenControl'] 
-    }), 
-    [zoom]
-  );
-
-  let tRows = undefined;
-  if (props.testCoords) {
-    tRows = props.testCoords.map((item, index) => {
-      return (
-        <Placemark 
-          key={index}
-          defaultGeometry={item}
-        />
-      );
-    });
-  }
-
-  return (
-      <YMaps
-        query={{
-          ns: 'use-load-option',
-          load: 'Map,Placemark,control.ZoomControl,control.FullscreenControl',
-        }}
-      >
-        <Map state={mapState}>
-          {tRows}
-        </Map>
-      </YMaps>      
-  )
 }
 
 export default ObjOnTheMap;
